@@ -1,0 +1,23 @@
+@if (isLoggedIn) {
+<div id="mySidenav" class="sidenav">
+  <p class="logo"><span>Milio</span>-Test</p>
+  <a href="dashboard" class="icon-a"
+    ><i class="fa fa-dashboard icons"></i> <span>Dashboard</span></a
+  >
+  <a href="employee" class="icon-a"
+    ><i class="fa fa-users icons"></i> <span>Customers</span>
+  </a>
+
+  <button class="footer-button" (click)="openDialog('0ms', '0ms')">
+    <i class="fa fa-power-off icons"></i> <span>Salir </span>
+  </button>
+</div>
+} @if (isLoggedIn) {
+<div id="main">
+  <div class="col-div-12"><router-outlet /></div>
+
+  <div class="clearfix"></div>
+</div>
+} @if (!isLoggedIn) {
+<router-outlet />
+}

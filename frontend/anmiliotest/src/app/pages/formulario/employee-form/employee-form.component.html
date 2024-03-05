@@ -1,0 +1,163 @@
+<p class="mb-5 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+  Detalles de empleados
+</p>
+<form
+  [formGroup]="employeeForm"
+  class="w-full"
+  (ngSubmit)="onSubmit()"
+  novalidate
+>
+  <div class="flex space-x-4">
+    <div class="flex-1 mb-3">
+      <label
+        for="names"
+        class="block mb-1 text-xs font-medium text-gray-900 dark:text-white"
+        >Nombre completo</label
+      >
+      <input
+        type="text"
+        id="names"
+        class="w-full form-control"
+        placeholder="Nombres"
+        formControlName="names"
+      />
+      @if (employeeForm.get('names')?.hasError('required') &&
+      employeeForm.get('names')?.touched) {
+      <div class="form-error">Los nombres son requeridos</div>
+      }
+    </div>
+    <div class="flex-1 mb-3">
+      <label
+        for="surnames"
+        class="block mb-1 text-xs font-medium text-gray-900 dark:text-white"
+        >Apellidos completos</label
+      >
+      <input
+        type="text"
+        id="surnames"
+        class="w-full form-control"
+        placeholder="Apellidos"
+        formControlName="surnames"
+      />
+      @if (employeeForm.get('surnames')?.hasError('required') &&
+      employeeForm.get('surnames')?.touched) {
+      <div class="form-error">Apellidos es requerido</div>
+      }
+    </div>
+  </div>
+  <div class="flex space-x-4">
+    <div class="flex-1 mb-3">
+      <label
+        for="surnames"
+        class="block mb-1 text-xs font-medium text-gray-900 dark:text-white"
+        >Tipo de documento</label
+      >
+      <select
+        placeholder="Tipo de documento"
+        formControlName="typeDocument"
+        class="w-full form-control p-2"
+      >
+        
+        <option value="CEDULA">CEDULA</option>
+        <option value="NIT">NIT</option>
+        <option value="T-IDENTIDAD">T-IDENTIDAD</option>
+      </select>
+
+      @if (employeeForm.get('typeDocument')?.hasError('required') &&
+      employeeForm.get('typeDocument')?.touched) {
+      <div class="form-error">Tipo documento es requerido</div>
+      }
+    </div>
+
+    <div class="flex-1 mb-3">
+      <label
+        for="document"
+        class="block mb-1 text-xs font-medium text-gray-900 dark:text-white"
+        >Documento</label
+      >
+      <input
+        type="text"
+        id="document"
+        class="w-full form-control"
+        placeholder="Documento"
+        formControlName="document"
+      />
+      @if (employeeForm.get('document')?.hasError('required') &&
+      employeeForm.get('document')?.touched) {
+      <div class="form-error">Documento es requerido</div>
+      }
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label
+      for="address"
+      class="block mb-2 text-xs font-medium text-gray-900 dark:text-white"
+      >Direccion</label
+    >
+    <input
+      type="text"
+      id="address"
+      class="form-control"
+      placeholder="Direccion"
+      formControlName="address"
+    />
+    @if (employeeForm.get('address')?.hasError('required') &&
+    employeeForm.get('address')?.touched) {
+    <div class="form-error">Direccion is required</div>
+    }
+  </div>
+
+  <div class="flex space-x-4 mb-2">
+    <div class="flex-1 mb-3">
+      <label
+        for="phone"
+        class="block mb-2 text-xs font-medium text-gray-900 dark:text-white"
+        >Telefono</label
+      >
+      <input
+        type="text"
+        id="phone"
+        class="form-control"
+        placeholder="phone"
+        formControlName="phone"
+      />
+      @if (employeeForm.get('phone')?.hasError('required') &&
+      employeeForm.get('phone')?.touched) {
+      <div class="form-error">Telefono is required</div>
+      }
+    </div>
+    <div class="flex-1 mb-3">
+      <label
+        for="age"
+        class="block mb-2 text-xs font-medium text-gray-900 dark:text-white"
+        >age</label
+      >
+      <input
+        type="text"
+        id="age"
+        class="form-control"
+        placeholder="age"
+        formControlName="age"
+      />
+      @if (employeeForm.get('age')?.hasError('required') &&
+      employeeForm.get('age')?.touched) {
+      <div class="form-error">Edad is required</div>
+      }
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2 text-center"
+  >
+    Guardar
+  </button>
+  <button
+    type="button"
+    (click)="onClose()"
+    class="text-white ms-2 bg-gray-700 hover:bg-gray-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2 text-center"
+  >
+    Cancelar
+  </button>
+</form>

@@ -1,0 +1,136 @@
+<div class="flex justify-between items-center mb-6">
+  <h4 class="font-bold text-2xl"></h4>
+
+  <button
+    type="button"
+    (click)="openModel()"
+    class="flex items-center justify-start text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+  >
+    <i class="fa fa-plus-circle text-lg me-3"></i>
+    <span>Agregar empleado </span>
+  </button>
+</div>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <table
+    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+  >
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    >
+      <tr>
+        <th scope="col" class="px-3 py-3">#</th>
+        <th scope="col" class="px-3 py-3">Nombres</th>
+        <th scope="col" class="px-3 py-3">Apellidos</th>
+        <th scope="col" class="px-3 py-3">Tipo</th>
+        <th scope="col" class="px-3 py-3">Documento</th>
+        <th scope="col" class="px-3 py-3">Direccion</th>
+        <th scope="col" class="px-3 py-3">Telefono</th>
+        <th scope="col" class="px-3 py-3">Edad</th>
+        <th scope="col" class="px-3 py-3">
+          <span class="sr-only">Editar</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of employees; track $index) {
+      <tr
+        class="bg-white border-b dark:bg-gray-800 text-sm dark:border-gray-700"
+      >
+        <td class="border-r px-2 py-2">
+          <div class="font-medium text-xstext-gray-900 dark:text-white">
+            {{ $index + 1 }}
+          </div>
+        </td>
+        <td class="border-r px-2 py-1">
+          <div class="font-medium text-xs text-gray-900 dark:text-white">
+            {{ item.names }}
+          </div>
+        </td>
+        <td class="border-r text-xs px-2 py-1">
+          {{ item.surnames }}
+        </td>
+        <td class="border-r text-xs px-2 py-1">
+          {{ item.typeDocument }}
+        </td>
+        <td class="border-r text-xs px-2 py-1">
+          {{ item.document }}
+        </td>
+        <td class="border-r text-xs px-2 py-1">
+          {{ item.address }}
+        </td>
+        <td class="border-r text-xs px-2 py-1">
+          {{ item.phone }}
+        </td>
+        <td class="border-r text-xs px-2 py-1">
+          {{ item.age }}
+        </td>
+        <td class="px-2 py-1 text-right">
+          <!-- <button
+            type="button"
+            (click)="item.id && loadEmployee(item)"
+            class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-4"
+          >
+            Edit
+          </button> -->
+
+          <button
+            (click)="item.id && loadEmployee(item)"
+            type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            <i class="fa fa-pencil mx-auto"></i>
+          </button>
+
+          <button
+            (click)="item.id && deleteEmployee(item.id)"
+            type="button"
+            class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm p-2 text-center inline-flex items-center me-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+          >
+            <i class="fa fa-trash mx-auto"></i>
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<div class="flex justify-end mt-4">
+  <nav class="flex items-center space-x-2">
+    <!-- Puedes personalizar el diseño y la lógica de tus botones de paginación aquí -->
+    <button
+      type="button"
+      [disabled]="currentPage === 1"
+      (click)="changePage(currentPage - 1)"
+      class="px-3 py-1 text-sm font-medium border rounded-md text-gray-600 dark:text-gray-300 hover:text-blue-500 hover:border-blue-500 focus:outline-none focus:ring focus:border-blue-300"
+    >
+      Anterior
+    </button>
+
+    <button
+      type="button"
+      [disabled]="currentPage === totalPages"
+      (click)="changePage(currentPage + 1)"
+      class="px-3 py-1 text-sm font-medium border rounded-md text-gray-600 dark:text-gray-300 hover:text-blue-500 hover:border-blue-500 focus:outline-none focus:ring focus:border-blue-300"
+    >
+      Siguiente
+    </button>
+  </nav>
+</div>
+
+<app-model [isOpen]="isModelOpen" (closeModel)="closeModel()">
+  <app-employee-form
+    (onCloseModel)="closeModel()"
+    [data]="employee"
+  ></app-employee-form>
+</app-model>
+
+@if (loading) {
+<div
+  class="fixed inset-0 bg-blue-500 bg-opacity-50 flex items-center justify-center"
+>
+  <div
+    class="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"
+  ></div>
+</div>
+}
